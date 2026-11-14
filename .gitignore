@@ -1,55 +1,30 @@
-# Prerequisites
-*.d
+# Operating systems
+.DS_Store
+._*
+Thumbs.db
+Desktop.ini
 
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
+# Local editor settings
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
 
-# Linker output
-*.ilk
-*.map
-*.exp
+# Temporary files
+*.tmp
+*.temp
+*.bak
 
-# Precompiled Headers
-*.gch
-*.pch
+# Python caches and local environments
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.env
+.env.*
+!.env.example
 
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
-
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
-
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
-
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
-
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
-
-# debug information files
-*.dwo
+# Independent protocol repositories cloned into this workspace
+/protocols/wireforge-*/

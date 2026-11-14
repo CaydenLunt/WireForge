@@ -1,0 +1,46 @@
+name: Protocol request
+description: Propose a protocol implementation for WireForge.
+title: "[Protocol request]: "
+body:
+  - type: input
+    id: protocol
+    attributes:
+      label: Protocol name
+      description: Give the protocol name and common abbreviation.
+    validations:
+      required: true
+  - type: textarea
+    id: specifications
+    attributes:
+      label: Relevant RFCs or specifications
+      description: Link official specifications and identify relevant updates or errata.
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Intended scope
+      description: Describe roles, modes, extensions, and explicit exclusions.
+    validations:
+      required: true
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation
+      description: Explain the use cases and engineering value.
+    validations:
+      required: true
+  - type: textarea
+    id: complexity
+    attributes:
+      label: Expected implementation complexity
+      description: Discuss state machines, platform needs, testing effort, and maintenance. State uncertainties.
+    validations:
+      required: true
+  - type: textarea
+    id: interoperability
+    attributes:
+      label: Interoperability considerations
+      description: Identify peer implementations, compatibility risks, and proposed test scenarios.
+    validations:
+      required: true

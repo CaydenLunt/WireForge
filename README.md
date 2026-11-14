@@ -1,6 +1,6 @@
 # WireForge
 
-**Network protocols built from the specification, tested on the wire.**
+**WireForge — Protocols built from the spec, tested on the wire.**
 
 WireForge is an open-source collection of network protocol implementations developed from scratch using official RFC specifications.
 
@@ -18,6 +18,8 @@ Rather than relying on existing protocol libraries, WireForge focuses on impleme
 - **Documentation:** Document implementation decisions, protocol behavior, and compliance with relevant specifications.
 
 ## Protocol Implementations
+
+This repository is the central development hub: it coordinates shared standards, planning, and work across protocol projects. Independent protocol repositories are cloned into `protocols/`, starting with [WireForge-TFTP](https://github.com/CaydenLunt/WireForge-TFTP). See the [protocol registry](protocols/README.md) for specifications and the [workspace setup](docs/architecture/overview.md) for cloning and Git commands.
 
 | Protocol | Description | Status |
 |---|---|---|
@@ -64,13 +66,23 @@ The goal is not simply to create working implementations, but to build implement
 
 ## Project Status
 
-**Early Development**
+**Foundation scaffold established; protocol implementations planned.**
 
-WireForge is currently in the planning and initial development stage. APIs, project structure, and implementation details are subject to change.
+The hub tracks shared documentation and repository configuration; protocol checkouts live locally under `protocols/` with independent Git histories. The TFTP repository is established, but implementation remains planned. No protocol functionality, verified RFC compliance, test coverage, or production readiness is claimed. APIs and implementation details remain undecided.
+
+## Project Documentation
+
+- [Architecture overview](docs/architecture/overview.md)
+- [Standards and compliance policy](docs/standards/compliance-policy.md)
+- [Protocol registry](protocols/README.md)
+- [Project roadmap](ROADMAP.md)
+- [Contribution guidelines](CONTRIBUTING.md)
 
 ## Contributing
 
 Contributions, bug reports, suggestions, and discussions are welcome as the project develops.
+
+Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a proposal or pull request. Protocol implementation changes belong in their respective repositories.
 
 ## License
 
