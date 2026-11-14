@@ -1,10 +1,10 @@
 # Architecture overview
 
-WireForge is a collection of independent protocol repositories developed within this root hub's workspace. Protocol repositories are cloned under `protocols/`. All protocol implementations are currently planned or under consideration; see the [registry](../../protocols/README.md).
+WireForge is a collection of independent protocol repositories developed within this root hub's workspace. Protocol repositories are registered as Git submodules under `protocols/`. All protocol implementations are currently planned or under consideration; see the [registry](../../protocols/README.md).
 
 ## Root repository
 
-The hub coordinates development across all protocol projects through the project overview, roadmap, protocol registry, contribution guidance, and common engineering policies. Its working directory contains the protocol checkouts, while its Git history tracks the shared documentation and configuration. There is currently no combined build or synchronized release train.
+The hub coordinates development across all protocol projects through the project overview, roadmap, protocol registry, contribution guidance, and common engineering policies. Its working directory contains the protocol checkouts, while its Git history tracks shared documentation, configuration, and selected protocol commits. There is currently no combined build or synchronized release train.
 
 ## Protocol repositories
 
@@ -20,32 +20,33 @@ Keep tools local to the implementation that needs them initially. Document usefu
 
 ## Local workspace and Git workflow
 
-Clone each protocol repository directly into `protocols/` using its documented remote. For TFTP, run this from the hub root if the checkout does not already exist:
+Protocol repositories are Git submodules under `protocols/`. Each retains its own history, branches, remote, and configuration. The hub records paths and URLs in `.gitmodules` and tracks a specific commit of each protocol. GitHub displays these as linked repositories once the hub changes are committed and pushed.
+
+Clone the hub and its registered submodules together:
 
 ```sh
-git clone https://github.com/CaydenLunt/WireForge-TFTP.git protocols/wireforge-tftp
+git clone --recurse-submodules https://github.com/CaydenLunt/WireForge.git
 ```
 
-```text
-WireForge/
-├── .git/
-├── docs/
-└── protocols/
-    ├── README.md
-    └── wireforge-tftp/
-        └── .git/
+For an existing hub checkout, initialize the submodules or update them to the commits recorded by the hub:
+
+```sh
+git submodule update --init --recursive
 ```
 
-These are ordinary nested Git clones, each with its own history, branches, remote, and configuration. The hub ignores `/protocols/wireforge-*/` so protocol files are committed in their owning repositories. The current setup does not use Git submodule registration or pin protocol revisions in the hub. Cloning the hub alone does not fetch protocol repositories; clone the projects needed for your work separately into the paths shown here.
+Check and save protocol work before updating. Submodule updates normally check out a detached HEAD; switch to an appropriate existing branch or create a development branch before making changes. Git metadata normally lives under the hub's `.git/modules/`, referenced by a `.git` file in each submodule checkout.
 
-Work from the hub directory and target the appropriate repository explicitly:
+Inspect the hub and protocol independently:
 
 ```sh
 git status
+git submodule status
 git -C protocols/wireforge-tftp status
 git -C protocols/wireforge-tftp remote -v
 ```
 
-Run builds and tests using each protocol repository's instructions and working directory. Commit hub policy changes in the hub and protocol changes in their own repository. A hub commit or push does not include changes from the nested clones. Coordinate changes spanning projects through linked issues and pull requests.
+Run builds and tests in the protocol's working directory using its instructions. Commit and push protocol changes to their own repository first. Then run `git add protocols/wireforge-tftp` in the hub and commit and push that pointer update. A hub commit does not include protocol source changes, and a hub push alone does not publish protocol commits.
+
+Register future protocols with `git submodule add <actual-repository-url> protocols/wireforge-<protocol>`. Include both `.gitmodules` and the new protocol pointer in the hub change. Coordinate work spanning projects through linked issues and pull requests.
 
 See the [roadmap](../../ROADMAP.md) for sequencing and [contribution guidelines](../../CONTRIBUTING.md) for proposals.

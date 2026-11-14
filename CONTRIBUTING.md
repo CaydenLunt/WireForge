@@ -12,7 +12,7 @@ Open an issue identifying the file and section, the problem, and a suggested cor
 
 ## Contribute to an implementation
 
-Clone protocol repositories into `protocols/wireforge-<protocol>/` and follow their own contribution, build, test, and release instructions. See the [workspace setup](docs/architecture/overview.md). Submit protocol code and related tests to the owning repository. Cite RFC numbers and sections, explain interpretations and alternatives, and update its compliance matrix for behavioral changes. The hub ignores these independent checkouts; use `git -C protocols/wireforge-tftp status` to inspect TFTP changes. Coordinate shared plans and standards here, and link related pull requests across repositories.
+Initialize protocol submodules under `protocols/wireforge-<protocol>/` with `git submodule update --init --recursive` and follow their own contribution, build, test, and release instructions. See the [workspace setup](docs/architecture/overview.md). Submit protocol code and related tests to the owning repository. Cite RFC numbers and sections, explain interpretations and alternatives, and update its compliance matrix for behavioral changes. The hub tracks each submodule commit; use `git -C protocols/wireforge-tftp status` to inspect TFTP changes. Work on a protocol branch and commit and push its changes first, then stage its updated pointer in the hub. Include `.gitmodules` when registering a new protocol. Coordinate shared plans and standards here, and link related pull requests across repositories.
 
 ## Testing expectations
 

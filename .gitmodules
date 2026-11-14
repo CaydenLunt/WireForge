@@ -1,0 +1,3 @@
+[submodule "protocols/wireforge-tftp"]
+	path = protocols/wireforge-tftp
+	url = https://github.com/CaydenLunt/WireForge-TFTP.git

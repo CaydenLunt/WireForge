@@ -13,7 +13,7 @@ This phase delivers documentation and configuration only.
 
 ## Phase 2 — TFTP: repository established; implementation planned
 
-- [x] Establish the independent [TFTP repository](https://github.com/CaydenLunt/WireForge-TFTP) and clone it into `protocols/wireforge-tftp/` for local development.
+- [x] Establish the independent [TFTP repository](https://github.com/CaydenLunt/WireForge-TFTP) and register it as a submodule at `protocols/wireforge-tftp/` for local development.
 - [ ] Implement core RFC 1350 functionality against an agreed scope and requirements matrix.
 - [ ] Implement option negotiation and extensions from RFCs 2347, 2348, 2349, and 7440 incrementally.
 - [ ] Develop automated compliance tests with requirement traceability.

@@ -19,7 +19,7 @@ Rather than relying on existing protocol libraries, WireForge focuses on impleme
 
 ## Protocol Implementations
 
-This repository is the central development hub: it coordinates shared standards, planning, and work across protocol projects. Independent protocol repositories are cloned into `protocols/`, starting with [WireForge-TFTP](https://github.com/CaydenLunt/WireForge-TFTP). See the [protocol registry](protocols/README.md) for specifications and the [workspace setup](docs/architecture/overview.md) for cloning and Git commands.
+This repository is the central development hub: it coordinates shared standards, planning, and work across protocol projects. Independent protocol repositories are registered as Git submodules in `protocols/`, starting with [WireForge-TFTP](https://github.com/CaydenLunt/WireForge-TFTP). See the [protocol registry](protocols/README.md) for specifications and the [workspace setup](docs/architecture/overview.md) for cloning and Git commands.
 
 | Protocol | Description | Status |
 |---|---|---|
@@ -68,7 +68,7 @@ The goal is not simply to create working implementations, but to build implement
 
 **Foundation scaffold established; protocol implementations planned.**
 
-The hub tracks shared documentation and repository configuration; protocol checkouts live locally under `protocols/` with independent Git histories. The TFTP repository is established, but implementation remains planned. No protocol functionality, verified RFC compliance, test coverage, or production readiness is claimed. APIs and implementation details remain undecided.
+The hub tracks shared documentation, repository configuration, and selected protocol submodule commits; protocol checkouts live locally under `protocols/` with independent Git histories. The TFTP repository is established, but implementation remains planned. No protocol functionality, verified RFC compliance, test coverage, or production readiness is claimed. APIs and implementation details remain undecided.
 
 ## Project Documentation
 
