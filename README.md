@@ -23,7 +23,7 @@ This repository is the central development hub: it coordinates shared standards,
 
 | Protocol | Description | Status |
 |---|---|---|
-| TFTP | Trivial File Transfer Protocol | Planned — First implementation |
+| TFTP | Trivial File Transfer Protocol | Initial development — ACK validation scaffold |
 | DNS | Domain Name System | Planned |
 | HTTP/1.1 | Hypertext Transfer Protocol | Planned |
 | TCP | Transmission Control Protocol | Under consideration |
@@ -32,7 +32,9 @@ Additional protocols may be added as the project evolves.
 
 ## First Project: TFTP
 
-The first implementation will focus on the Trivial File Transfer Protocol (TFTP), a lightweight file transfer protocol operating over UDP.
+The first implementation focuses on the Trivial File Transfer Protocol (TFTP), a lightweight file transfer protocol operating over UDP.
+
+The current C scaffold validates ACK packet length, opcode, and input/output pointers. Block-number decoding is not implemented: `decode_ack` currently returns success after validation without populating the output. CMake configures compiler warnings but does not yet define build or test targets. See the [protocol registry](protocols/README.md) for the tracked source and remaining work.
 
 ### Planned Features
 
@@ -66,9 +68,9 @@ The goal is not simply to create working implementations, but to build implement
 
 ## Project Status
 
-**Foundation scaffold established; protocol implementations planned.**
+**Foundation established; TFTP in initial development.**
 
-The hub tracks shared documentation, repository configuration, and selected protocol submodule commits; protocol checkouts live locally under `protocols/` with independent Git histories. The TFTP repository is established, but implementation remains planned. No protocol functionality, verified RFC compliance, test coverage, or production readiness is claimed. APIs and implementation details remain undecided.
+The hub tracks shared documentation, repository configuration, and selected protocol submodule commits; protocol checkouts live locally under `protocols/` with independent Git histories. TFTP has an initial C ACK-validation scaffold; complete transfers and the features listed above remain planned. No verified RFC compliance, test coverage, or production readiness is claimed. APIs and implementation details are preliminary.
 
 ## Project Documentation
 

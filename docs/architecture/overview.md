@@ -1,6 +1,6 @@
 # Architecture overview
 
-WireForge is a collection of independent protocol repositories developed within this root hub's workspace. Protocol repositories are registered as Git submodules under `protocols/`. All protocol implementations are currently planned or under consideration; see the [registry](../../protocols/README.md).
+WireForge is a collection of independent protocol repositories developed within this root hub's workspace. Protocol repositories are registered as Git submodules under `protocols/`. TFTP is in initial development with a C ACK-validation scaffold; other protocols remain planned or under consideration. See the [registry](../../protocols/README.md) for implementation limits.
 
 ## Root repository
 

@@ -11,9 +11,11 @@ Statuses describe repository deliverables, not RFC compliance. Complete means th
 
 This phase delivers documentation and configuration only.
 
-## Phase 2 — TFTP: repository established; implementation planned
+## Phase 2 — TFTP: initial development
 
 - [x] Establish the independent [TFTP repository](https://github.com/CaydenLunt/WireForge-TFTP) and register it as a submodule at `protocols/wireforge-tftp/` for local development.
+- [x] Add the initial C ACK-validation scaffold and CMake compiler warning settings ([23c0dbc](https://github.com/CaydenLunt/WireForge-TFTP/commit/23c0dbc5513057c841545d1dee49cfcaa8041eb1)).
+- [ ] Complete ACK block-number decoding, add build targets, and test validation and decoding behavior.
 - [ ] Implement core RFC 1350 functionality against an agreed scope and requirements matrix.
 - [ ] Implement option negotiation and extensions from RFCs 2347, 2348, 2349, and 7440 incrementally.
 - [ ] Develop automated compliance tests with requirement traceability.
