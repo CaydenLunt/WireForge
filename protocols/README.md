@@ -9,7 +9,7 @@ This directory contains the protocol registry and independent protocol submodule
 | HTTP/1.1 | TBD | RFC 9110, 9112 | Planned |
 | TCP | TBD | RFC 9293 | Under consideration |
 
-TFTP is the first implementation, registered at `protocols/wireforge-tftp/` relative to the hub root. The tracked update, [45e69c2](https://github.com/CaydenLunt/WireForge-TFTP/commit/45e69c20e77aeae2b21b2b45799dd6ce8d1ca92f), includes C ACK decoding, a CMake/CTest target, unit tests, and a shell test runner. The [codec](wireforge-tftp/src/protocol/codec.c) validates packet length, opcode, and input/output pointers, then writes the 16-bit block number decoded in network byte order. Rejected inputs leave the output unchanged. The [unit tests](wireforge-tftp/tests/unit/test_codec_ack.c) cover byte order, boundary values, invalid lengths and opcodes, null pointers, and output preservation. Client/server transfers and option extensions remain planned.
+TFTP is the first implementation, registered at `protocols/wireforge-tftp/` relative to the hub root. The current checkout, [369cebc](https://github.com/CaydenLunt/WireForge-TFTP/commit/369cebc59a5ee1f35578ce8c3c34450f30eb322e), matches upstream `main` as checked on November 17, 2026, and includes C ACK decoding, a CMake/CTest target, unit tests, and a shell test runner. The [codec](wireforge-tftp/src/protocol/codec.c) validates packet length, opcode, and input/output pointers, then writes the 16-bit block number decoded in network byte order. Rejected inputs leave the output unchanged. The [unit tests](wireforge-tftp/tests/unit/test_codec_ack.c) cover byte order, boundary values, invalid lengths and opcodes, null pointers, and output preservation. ACK validation has been simplified, tests are registered individually, and GitHub Actions builds with GCC and Clang. DATA decoding remains an unfinished stub with an unused payload-validation helper; client/server transfers and option extensions remain planned. The hub records its selected submodule revision separately; see the [Git workflow](../docs/architecture/overview.md) when recording an update.
 
 ### Running the TFTP tests
 
@@ -21,7 +21,7 @@ cmake --build protocols/wireforge-tftp/build --config Debug
 ctest --test-dir protocols/wireforge-tftp/build -C Debug --output-on-failure
 ```
 
-The `ctest --test-dir` option requires CMake 3.20 or newer; with older versions, run `ctest -C Debug --output-on-failure` from the build directory instead. In a POSIX shell, the equivalent helper is `sh protocols/wireforge-tftp/run-tests.sh`. The CTest test is named `codec_ack`; these focused tests do not establish complete TFTP compliance.
+The `ctest --test-dir` option requires CMake 3.20 or newer; with older versions, run `ctest -C Debug --output-on-failure` from the build directory instead. In a POSIX shell, the equivalent helper is `sh protocols/wireforge-tftp/run-tests.sh`. CMake builds `test_codec_ack` and registers nine individually named CTest tests, such as `decode_ack_rejects_invalid_opcode`. These focused tests do not establish complete TFTP compliance. See the [TFTP development guide](wireforge-tftp/docs/development.md) for CI, test coverage, and known limitations.
 
 These RFC lists are starting points; each repository must review updates, errata, and dependencies under the [compliance policy](../docs/standards/compliance-policy.md).
 
