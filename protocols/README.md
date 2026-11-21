@@ -9,7 +9,11 @@ This directory contains the protocol registry and independent protocol submodule
 | HTTP/1.1 | TBD | RFC 9110, 9112 | Planned |
 | TCP | TBD | RFC 9293 | Under consideration |
 
-TFTP is the first implementation, registered at `protocols/wireforge-tftp/` relative to the hub root. The current checkout, [369cebc](https://github.com/CaydenLunt/WireForge-TFTP/commit/369cebc59a5ee1f35578ce8c3c34450f30eb322e), matches upstream `main` as checked on November 17, 2026, and includes C ACK decoding, a CMake/CTest target, unit tests, and a shell test runner. The [codec](wireforge-tftp/src/protocol/codec.c) validates packet length, opcode, and input/output pointers, then writes the 16-bit block number decoded in network byte order. Rejected inputs leave the output unchanged. The [unit tests](wireforge-tftp/tests/unit/test_codec_ack.c) cover byte order, boundary values, invalid lengths and opcodes, null pointers, and output preservation. ACK validation has been simplified, tests are registered individually, and GitHub Actions builds with GCC and Clang. DATA decoding remains an unfinished stub with an unused payload-validation helper; client/server transfers and option extensions remain planned. The hub records its selected submodule revision separately; see the [Git workflow](../docs/architecture/overview.md) when recording an update.
+TFTP is the first implementation, registered at `protocols/wireforge-tftp/` relative to the hub root. The selected checkout, [2d3d362](https://github.com/CaydenLunt/WireForge-TFTP/commit/2d3d362266e1cbcbc299aeda8ba87d329a982886), matches upstream `main` as checked on November 21, 2026.
+
+The C [codec](wireforge-tftp/src/protocol/codec.c) uses separate ACK and DATA packet structures. It validates pointers, lengths, and opcodes before decoding network-order block numbers. ACK requires four bytes; DATA accepts four through 516 bytes and exposes a borrowed payload pointer and length (0 through 512 bytes). Initialization helpers validate packets without decoding their block numbers. Rejected inputs leave destination fields unchanged. Callers retain ownership of the input buffer and must keep it readable while decoding or accessing payloads.
+
+The [ACK tests](wireforge-tftp/tests/unit/test_codec_ack.c) cover byte order, boundary values, invalid lengths and opcodes, null pointers, and output preservation. The [packet contract test](wireforge-tftp/tests/unit/test_codec_packet.c) covers initialization, DATA validation, every valid payload length, empty DATA, and payload-byte preservation. GitHub Actions configures Ubuntu GCC and Clang builds. UDP transport, client/server transfers, packet encoding, RRQ/WRQ/ERROR handling, and option extensions remain planned. See the [Git workflow](../docs/architecture/overview.md) when recording an update.
 
 ### Running the TFTP tests
 
@@ -21,7 +25,7 @@ cmake --build protocols/wireforge-tftp/build --config Debug
 ctest --test-dir protocols/wireforge-tftp/build -C Debug --output-on-failure
 ```
 
-The `ctest --test-dir` option requires CMake 3.20 or newer; with older versions, run `ctest -C Debug --output-on-failure` from the build directory instead. In a POSIX shell, the equivalent helper is `sh protocols/wireforge-tftp/run-tests.sh`. CMake builds `test_codec_ack` and registers nine individually named CTest tests, such as `decode_ack_rejects_invalid_opcode`. These focused tests do not establish complete TFTP compliance. See the [TFTP development guide](wireforge-tftp/docs/development.md) for CI, test coverage, and known limitations.
+The `ctest --test-dir` option requires CMake 3.20 or newer; with older versions, run `ctest -C Debug --output-on-failure` from the build directory instead. In a POSIX shell, the equivalent helper is `sh protocols/wireforge-tftp/run-tests.sh`. CMake builds `test_codec_ack` and `test_codec_packet`, registering ten CTest entries: nine individually named ACK tests, such as `decode_ack_rejects_invalid_opcode`, and `codec_packet_contract`. These focused tests do not establish complete TFTP compliance. See the [TFTP development guide](wireforge-tftp/docs/development.md) for CI, test coverage, and known limitations.
 
 These RFC lists are starting points; each repository must review updates, errata, and dependencies under the [compliance policy](../docs/standards/compliance-policy.md).
 

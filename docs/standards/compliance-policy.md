@@ -16,7 +16,7 @@ Use explicit states such as planned, implemented but unverified, verified for a 
 
 ## Example TFTP compliance matrix
 
-These illustrative rows cover a small subset of [RFC 1350](https://www.rfc-editor.org/rfc/rfc1350), not a complete audit. Components and tests below are proposed names, not existing artifacts. Every row is unimplemented and unverified. Base-protocol behavior below assumes no negotiated extensions.
+These illustrative rows cover a small subset of [RFC 1350](https://www.rfc-editor.org/rfc/rfc1350), not a complete audit. Components and tests below are proposed names, not existing artifacts. These rows are illustrative, not a live implementation status report; consult the [TFTP development guide](../../protocols/wireforge-tftp/docs/development.md) for current codec coverage. Base-protocol behavior below assumes no negotiated extensions.
 
 | ID | Source | Requirement / classification | Proposed component | Proposed test | Status / evidence |
 |---|---|---|---|---|---|
@@ -25,7 +25,7 @@ These illustrative rows cover a small subset of [RFC 1350](https://www.rfc-edito
 | TFTP-003 | RFC 1350 §6 | A short final DATA packet is acknowledged; protocol rule in prose | Transfer completion | Empty file and exact-block-size transfer termination | Planned / none |
 | TFTP-004 | RFC 1350 §6 | Receiver is encouraged to linger after final ACK; recommendation in prose | Session cleanup | Drop final ACK and resend final DATA | Planned / none |
 
-Before TFTP development, expand the inventory to the extensions listed in the registry and relevant dependencies. Record option support individually and distinguish base-protocol tests from negotiated-option tests.
+As TFTP development proceeds, expand the inventory to the extensions listed in the registry and relevant dependencies. Record option support individually and distinguish base-protocol tests from negotiated-option tests.
 
 ## Testing expectations
 
