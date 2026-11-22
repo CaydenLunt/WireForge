@@ -23,7 +23,7 @@ This repository is the central development hub: it coordinates shared standards,
 
 | Protocol | Description | Status |
 |---|---|---|
-| TFTP | Trivial File Transfer Protocol | Initial development — ACK/DATA decoding and unit tests |
+| TFTP | Trivial File Transfer Protocol | Initial development — ACK/DATA/ERROR decoding and unit tests |
 | DNS | Domain Name System | Planned |
 | HTTP/1.1 | Hypertext Transfer Protocol | Planned |
 | TCP | Transmission Control Protocol | Under consideration |
@@ -34,13 +34,13 @@ Additional protocols may be added as the project evolves.
 
 The first implementation focuses on the Trivial File Transfer Protocol (TFTP), a lightweight file transfer protocol operating over UDP.
 
-The current C implementation validates ACK and DATA packet lengths, opcodes, and pointers, then decodes 16-bit block numbers in network byte order. DATA decoding exposes a borrowed payload of 0 through 512 bytes. Separate packet types and validated initialization helpers preserve output on rejection. Two CMake test executables provide ten CTest entries covering ACK decoding and packet API contracts. See the [protocol registry](protocols/README.md) for the tracked source, test commands, and remaining work.
+The current C implementation validates ACK and DATA packet lengths, opcodes, and pointers, then decodes 16-bit block numbers in network byte order. DATA decoding exposes a borrowed payload of 0 through 512 bytes. Separate packet types and validated initialization helpers preserve output on rejection. ERROR decoding exposes a host-order error code and borrowed NUL-terminated message. Three CMake test executables provide 33 individually reported tests covering ACK, DATA, ERROR, and packet initialization. See the [protocol registry](protocols/README.md) for the tracked source, test commands, and remaining work.
 
 ### Planned Features
 
 - TFTP client and server implementations
 - Read and write requests (RRQ/WRQ)
-- DATA, ACK, and ERROR packet handling
+- DATA, ACK, and ERROR encoding and session-level handling
 - Independent concurrent transfer sessions
 - Timeout and retransmission handling
 - Transfer error detection and reporting
@@ -70,7 +70,7 @@ The goal is not simply to create working implementations, but to build implement
 
 **Foundation established; TFTP in initial development.**
 
-The hub tracks shared documentation, repository configuration, and selected protocol submodule commits; protocol checkouts live locally under `protocols/` with independent Git histories. TFTP has C ACK/DATA decoding, payload access, and focused unit tests; complete transfers and the features listed above remain planned. No verified protocol-wide RFC compliance or production readiness is claimed. APIs and implementation details are preliminary.
+The hub tracks shared documentation, repository configuration, and selected protocol submodule commits; protocol checkouts live locally under `protocols/` with independent Git histories. TFTP has C ACK/DATA/ERROR decoding, borrowed payload/message access, and focused unit tests; complete transfers and the features listed above remain planned. No verified protocol-wide RFC compliance or production readiness is claimed. APIs and implementation details are preliminary.
 
 ## Project Documentation
 
