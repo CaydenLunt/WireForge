@@ -17,7 +17,8 @@ This phase delivers documentation and configuration only.
 - [x] Add the initial C ACK-validation scaffold and CMake compiler warning settings ([23c0dbc](https://github.com/CaydenLunt/WireForge-TFTP/commit/23c0dbc5513057c841545d1dee49cfcaa8041eb1)).
 - [x] Complete ACK block-number decoding, add a CMake/CTest target, and add unit tests for validation and decoding behavior ([4ce0f95](https://github.com/CaydenLunt/WireForge-TFTP/commit/4ce0f958eed78b0faf9484b0ce4016369937c302)).
 - [x] Add separate ACK/DATA packet types, validated initialization, DATA block-number decoding and borrowed payload access, plus a packet contract test (ten CTest entries total; [2d3d362](https://github.com/CaydenLunt/WireForge-TFTP/commit/2d3d362266e1cbcbc299aeda8ba87d329a982886)).
-- [x] Split packet API checks into individually registered tests and implement ERROR decoding/initialization with 12 named tests (33 total in the local checkout; see the [registry](protocols/README.md) for commit/pointer status).
+- [x] Split packet API checks into individually registered tests and implement ERROR decoding/initialization with 12 named tests (33 total; see the [registry](protocols/README.md) for commit/pointer status).
+- [x] Centralize byte-order reads and opcode validation in guarded helper headers, and document ERROR requirement IDs at their implementation sites ([980a262](https://github.com/CaydenLunt/WireForge-TFTP/commit/980a26235b7d648400c8e762bdca5d2e66df77cf)).
 - [ ] Implement core RFC 1350 functionality against an agreed scope and requirements matrix.
 - [x] Register nine ACK cases individually in CTest and add Ubuntu GCC/Clang CI. See the [development guide](protocols/wireforge-tftp/docs/development.md) for coverage and limitations.
 - [ ] Implement option negotiation and extensions from RFCs 2347, 2348, 2349, and 7440 incrementally.
