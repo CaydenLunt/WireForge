@@ -1,6 +1,6 @@
 # Architecture overview
 
-WireForge is a collection of independent protocol repositories developed within this root hub's workspace. Protocol repositories are registered as Git submodules under `protocols/`. TFTP is in initial development with C ACK/DATA/ERROR decoding, borrowed payload/message access, and unit tests; other protocols remain planned or under consideration. See the [registry](../../protocols/README.md) for implementation limits.
+WireForge is a collection of independent protocol repositories developed within this root hub's workspace. Protocol repositories are registered as Git submodules under `protocols/`. TFTP is in initial development with C ACK/DATA/ERROR/RRQ/WRQ decoding, borrowed payload/message access, and unit tests; other protocols remain planned or under consideration. See the [registry](../../protocols/README.md) for implementation limits.
 
 ## Root repository
 
@@ -44,6 +44,17 @@ git submodule status
 git -C protocols/wireforge-tftp status
 git -C protocols/wireforge-tftp remote -v
 ```
+
+Updating to the hub's recorded commit is different from checking the latest protocol release of work. To bring a clean TFTP `main` checkout to the latest remote `main`, use:
+
+```sh
+git -C protocols/wireforge-tftp fetch origin
+git -C protocols/wireforge-tftp switch main
+git -C protocols/wireforge-tftp merge --ff-only origin/main
+git -C protocols/wireforge-tftp rev-list --left-right --count HEAD...origin/main
+```
+
+The final command reports `0 0` when local and fetched remote commits match. Save local work first; if fast-forwarding fails, review the divergent commits rather than resetting the checkout. Fetching verifies remote state but does not change the hub's recorded pointer. After validation, include the submodule pointer with the hub documentation update. Future clones receive that version once the hub commit is published; submodules do not automatically follow the latest branch tip.
 
 Run builds and tests in the protocol's working directory using its instructions. Commit and push protocol changes to their own repository first. Then run `git add protocols/wireforge-tftp` in the hub and commit and push that pointer update. A hub commit does not include protocol source changes, and a hub push alone does not publish protocol commits.
 

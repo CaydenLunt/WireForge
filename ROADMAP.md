@@ -20,6 +20,9 @@ This phase delivers documentation and configuration only.
 - [x] Split packet API checks into individually registered tests and implement ERROR decoding/initialization with 12 named tests (33 total; see the [registry](protocols/README.md) for commit/pointer status).
 - [x] Centralize byte-order reads and opcode validation in guarded helper headers, and document ERROR requirement IDs at their implementation sites ([980a262](https://github.com/CaydenLunt/WireForge-TFTP/commit/980a26235b7d648400c8e762bdca5d2e66df77cf)).
 - [ ] Implement core RFC 1350 functionality against an agreed scope and requirements matrix.
+- [x] Implement RRQ/WRQ decoding and validated initialization, including malformed request tests (34 CTest entries total).
+- [x] Separate packet decoding into `decoder.c` and shared length/opcode and bounded-string helpers into `helpers.c`, retaining the public `codec.h` interface.
+- [ ] Implement packet encoding and read/write transfer session handling; request parsing alone does not implement file transfers.
 - [x] Register nine ACK cases individually in CTest and add Ubuntu GCC/Clang CI. See the [development guide](protocols/wireforge-tftp/docs/development.md) for coverage and limitations.
 - [ ] Implement option negotiation and extensions from RFCs 2347, 2348, 2349, and 7440 incrementally.
 - [ ] Develop automated compliance tests with requirement traceability.
